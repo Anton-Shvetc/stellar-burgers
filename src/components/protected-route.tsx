@@ -25,8 +25,9 @@ export const ProtectedRoute = ({
   }
 
   if (!onlyUnAuth && !user) {
-    // если пользователь на странице авторизации и данных в хранилище нет, то делаем редирект
-    return <Navigate replace to='/login' state={{ from: location }} />; // в поле from объекта location.state записываем информацию о URL
+    if (location.pathname !== '/reset-password') {
+      return <Navigate replace to='/login' state={{ from: location }} />;
+    }
   }
 
   if (onlyUnAuth && user) {
